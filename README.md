@@ -36,6 +36,24 @@
 - **Processes:** Inspect running apps/processes and terminate them.
 - **Location Simulator:** Simulate the GPS location of your device.
 
+### Location Simulation FAQ
+**Q: How is virtual location simulation implemented?**  
+
+A: StikDebug uses the imported pairing file to authenticate to the device.  
+It then calls into `idevice`-based location simulation APIs to send simulated latitude/longitude values to device services.  
+While simulation is active, the app periodically re-sends the selected coordinates to keep the simulated position stable.
+
+**Q: Can other apps detect this simulated location?**  
+
+A: It depends on how the app validates location. Apps that only read standard system location may simply receive the simulated coordinates.  
+Apps with anti-cheat, integrity checks, or cross-checks may still detect inconsistencies, for example:
+- network/IP region checks
+- motion sensor correlation
+- map behavior analysis
+- server-side risk controls
+
+There is no guarantee that simulation is undetectable in all apps.
+
 ## Download
 > [!WARNING]
 > **Notice:** StikDebug is no longer available on the App Store. Please use the official download methods below.
